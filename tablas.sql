@@ -10,6 +10,39 @@ CREATE TABLE DETALLE_PRESTAMO (
   FOREIGN KEY (prestamo_id) REFERENCES PRESTAMO(id_prestamo),
   FOREIGN KEY (videojuego_id) REFERENCES VIDEOJUEGO(id_videojuego),
   );
-  
+
+CREATE TABLE ROL (
+    id_rol INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_rol VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE USUARIO (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) NOT NULL UNIQUE,
+    telefono VARCHAR(20) NOT NULL,
+    fecha_registro DATE NOT NULL,
+    id_rol INT,
+
+    FOREIGN KEY (id_rol)
+        REFERENCES ROL(id_rol)
+);
+
+CREATE TABLE PLATAFORMA (
+    id_plataforma INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_plataforma VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE DESARROLLADOR (
+    id_desarrollador INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_desarrollador VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE ESTADO (
+    id_estado INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_estado VARCHAR(30) NOT NULL
+);
   
   

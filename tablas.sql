@@ -64,4 +64,15 @@ prestamo_id INT,
 FOREIGN KEY (prestamo_id) REFERENCES PRESTAMO(id_prestamo)
 );
 
+CREATE TABLE PROGRESO_USUARIO (
+id_progreso INT PRIMARY KEY AUTO_INCREMENT,
+porcentaje DECIMAL(5,2) NOT NULL,
+fecha_actualizacion DATE NOT NULL,
+usuario_id INT,
+videojuego_id INT,
+
+FOREIGN KEY (usuario_id) REFERENCES USUARIO(id_usuario),
+FOREIGN KEY (videojuego_id) REFERENCES VIDEOJUEGO(id_videojuego)
+);
+
 

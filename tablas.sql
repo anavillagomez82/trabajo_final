@@ -54,3 +54,14 @@ logro_id INT,
 FOREIGN KEY (usuario_id) REFERENCES USUARIO(id_usuario),
 FOREIGN KEY (logro_id) REFERENCES LOGRO(id_logro)
 );  
+
+CREATE TABLE MULTA (
+id_multa INT PRIMARY KEY AUTO_INCREMENT,
+monto DECIMAL(10,2) NOT NULL,
+estado_pago VARCHAR(20) NOT NULL,
+prestamo_id INT,
+
+FOREIGN KEY (prestamo_id) REFERENCES PRESTAMO(id_prestamo)
+);
+
+

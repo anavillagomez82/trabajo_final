@@ -45,4 +45,12 @@ CREATE TABLE ESTADO (
     tipo_estado VARCHAR(30) NOT NULL
 );
   
-  
+CREATE TABLE LOGRO_USUARIO (
+id_logro_usuario INT PRIMARY KEY AUTO_INCREMENT,
+fecha_desbloqueo DATE NOT NULL,
+usuario_id INT,
+logro_id INT,
+
+FOREIGN KEY (usuario_id) REFERENCES USUARIO(id_usuario),
+FOREIGN KEY (logro_id) REFERENCES LOGRO(id_logro)
+);  

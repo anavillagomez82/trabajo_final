@@ -76,3 +76,10 @@ FOREIGN KEY (videojuego_id) REFERENCES VIDEOJUEGO(id_videojuego)
 );
 
 
+CREATE TABLE logro (
+id_logro SERIAL PRIMARY KEY,
+nombre VARCHAR(100) NOT NULL,
+descripcion VARCHAR(255) NOT NULL,
+videojuego_id INT,
+);
+

@@ -83,3 +83,48 @@ descripcion VARCHAR(255) NOT NULL,
 videojuego_id INT,
 );
 
+CREATE TABLE sesion_juego (
+id_sesion SERIAL PRIMARY KEY,
+fecha_inicio DATE NOT NULL,
+fecha_fin DATE NOT NULL,
+horas_jugadas DECIMAL(10,2) NOT NULL,
+usuario_id INT,
+videojuego_id INT,
+);
+
+CREATE TABLE videojuego (
+id_videojuego SERIAL PRIMARY KEY,
+titulo VARCHAR(100) NOT NULL,
+anio_lanzamiento INT NOT NULL,
+stock INT NOT NULL,
+genero_id INT,
+plataforma_id INT,
+desarrollador_id INT,
+estado_id INT,
+);
+
+CREATE TABLE comentario (
+id_comentario SERIAL PRIMARY KEY,
+texto TEXT NOT NULL,
+calificacion INT NOT NULL,
+fecha_comentario DATE NOT NULL,
+usuario_id INT,
+videojuego_id INT,
+);
+
+CREATE TABLE estadistica (
+id_estadistica SERIAL PRIMARY KEY,
+total_horas_jugadas DECIMAL(10,2) NOT NULL,
+juegos_completados INT NOT NULL,
+fecha_actualizacion DATE NOT NULL,
+usuario_id INT,
+);
+
+CREATE TABLE prestamo (
+id_prestamo SERIAL PRIMARY KEY,
+fecha_prestamo DATE NOT NULL,
+fecha_limite DATE NOT NULL,
+fecha_devolucion DATE NOT NULL,
+estado_prestamo VARCHAR(30) NOT NULL,
+usuario_id INT,
+);

@@ -1,4 +1,3 @@
-
 CREATE DATABASE biblioteca_videojuegos;
 USE biblioteca_videojuegos;
 
@@ -28,9 +27,6 @@ CREATE TABLE ESTADO (
     tipo_estado VARCHAR(30) NOT NULL
 );
 
-Mensaje:
-Se implementó tabla USUARIO y su relación con ROL
-    
 CREATE TABLE USUARIO (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,

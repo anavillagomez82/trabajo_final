@@ -1,5 +1,3 @@
-Mensaje:
-Se crearon tablas maestras del sistema
 
 CREATE DATABASE biblioteca_videojuegos;
 USE biblioteca_videojuegos;
@@ -45,8 +43,6 @@ CREATE TABLE USUARIO (
         REFERENCES ROL(id_rol)
 );
 
-Mensaje:
-Se implementó tabla VIDEOJUEGO con relaciones
 CREATE TABLE VIDEOJUEGO (
     id_videojuego INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(100) NOT NULL,
@@ -119,9 +115,6 @@ CREATE TABLE MULTA (
     FOREIGN KEY (prestamo_id)
         REFERENCES PRESTAMO(id_prestamo)
 );
-
-Mensaje:
-Se implementó sistema de progreso y estadísticas
     
 CREATE TABLE PROGRESO_USUARIO (
     id_progreso INT PRIMARY KEY AUTO_INCREMENT,
@@ -155,9 +148,6 @@ CREATE TABLE SESION_JUEGO (
         REFERENCES VIDEOJUEGO(id_videojuego)
 );
 
-Mensaje:
-Se implementó sistema de comentarios y logros
-    
 CREATE TABLE COMENTARIO (
     id_comentario INT PRIMARY KEY AUTO_INCREMENT,
 

@@ -34,3 +34,8 @@ VALUES
 ('Disponible'),
 ('Prestado'),
 ('Mantenimiento');
+
+INSERT INTO logro (id_logro, nombre, descripción, videojuego_id)
+VALUES
+(100,'juego completado', 'se obtiene al completar el juego',10);
+

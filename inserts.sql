@@ -37,7 +37,12 @@ VALUES
 
 INSERT INTO logro (id_logro, nombre, descripción, videojuego_id)
 VALUES
-(100,'juego completado', 'se obtiene al completar el juego',10);
+(100,'juego completado', 'se obtiene al completar el juego',10),
+(1, 'inicio', 'se obtiene cuando entras por primera vez al juego',10),
+(5, 'tutorial completado', 'se obtiene cuando completas el tutorial con exito', 10'),
+(10, 'modo facil completado', 'se obtiene cuando pasas al modo intermedio', 10),
+(25, 'modo intermedio completado', 'se obtiene cuando pasas al modo dificil', 10);
+
 
 INSERT INTO PRESTAMO (fecha_prestamo, fecha_limite, fecha_devolucion, estado_prestamo, usuario_id)
 VALUES

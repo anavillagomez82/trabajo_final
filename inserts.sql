@@ -10,6 +10,9 @@ INSERT INTO USUARIO (nombre, correo, telefono, fecha_registro, id_rol)
 VALUES
 ('Juan Perez', 'juan@gmail.com', '999111222', '2025-01-10', 2),
 ('Maria Lopez', 'maria@gmail.com', '988777666', '2025-02-15', 1);
+('Carlos Ruiz', 'carlos@gmail.com', '977888555', '2025-03-05', 3),
+('Lucia Torres', 'lucia@gmail.com', '966444333', '2025-03-20', 2),
+('Pedro Gomez', 'pedro@gmail.com', '955222111', '2025-04-01', 5);
 
 INSERT INTO GENERO (nombre_genero)
 VALUES

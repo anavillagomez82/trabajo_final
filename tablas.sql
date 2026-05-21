@@ -66,10 +66,6 @@ CREATE TABLE VIDEOJUEGO (
     FOREIGN KEY (estado_id)
         REFERENCES ESTADO(id_estado)
 );
-
-Mensaje:
-Se implementó módulo de préstamos y multas
-    
 CREATE TABLE PRESTAMO (
     id_prestamo INT PRIMARY KEY AUTO_INCREMENT,
     fecha_prestamo DATE NOT NULL,

@@ -27,7 +27,8 @@ VALUES
 ('PC'),
 ('PlayStation 5'),
 ('Xbox Series X'),
-('Nintendo Switch');
+('Nintendo Switch')
+('Mobile');
 
 INSERT INTO DESARROLLADOR (nombre_desarrollador)
 VALUES

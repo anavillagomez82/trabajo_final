@@ -39,8 +39,7 @@ INSERT INTO logro (id_logro, nombre, descripción, videojuego_id)
 VALUES
 (100,'juego completado', 'se obtiene al completar el juego',10);
 
-INSERT INTO PRESTAMO
-(fecha_prestamo, fecha_limite, fecha_devolucion, estado_prestamo, usuario_id)
+INSERT INTO PRESTAMO (fecha_prestamo, fecha_limite, fecha_devolucion, estado_prestamo, usuario_id)
 VALUES
 ('2026-05-01', '2026-05-10', '2026-05-09', 'Devuelto', 1),
 ('2026-05-05', '2026-05-15', NULL, 'Activo', 2),
@@ -48,3 +47,10 @@ VALUES
 ('2026-05-09', '2026-05-19', NULL, 'Activo', 2),
 ('2026-05-11', '2026-05-21', '2026-05-20', 'Devuelto', 1);
 
+INSERT INTO VIDEOJUEGO (titulo, año_lanzamiento, stock, genero_id, plataforma_id, desarrollador_id, estado_id)
+VALUES
+('Elden Ring', 2022, 5, 2, 2, 1, 1),
+('GTA V', 2013, 8, 1, 1, 3, 1),
+('Resident Evil 4', 2023, 4, 3, 2, 4, 1),
+('Zelda Tears of the Kingdom', 2023, 6, 4, 4, 2, 1),
+('Half Life 2', 2004, 3, 1, 1, 4, 2);

@@ -19,7 +19,8 @@ VALUES
 ('Acción'),
 ('RPG'),
 ('Terror'),
-('Aventura');
+('Aventura')
+('Deportes');
 
 INSERT INTO PLATAFORMA (nombre_plataforma)
 VALUES

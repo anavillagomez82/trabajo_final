@@ -2,6 +2,9 @@ INSERT INTO ROL (nombre_rol, descripcion)
 VALUES
 ('Administrador', 'Control total del sistema'),
 ('Cliente', 'Usuario normal del sistema');
+('Moderador', 'Gestiona comentarios y usuarios'),
+('Invitado', 'Acceso limitado al sistema'),
+('Tester', 'Prueba funcionalidades del sistema');
 
 INSERT INTO USUARIO (nombre, correo, telefono, fecha_registro, id_rol)
 VALUES

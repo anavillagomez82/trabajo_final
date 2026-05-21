@@ -1,4 +1,4 @@
---TABLA 1: ROL --
+
 INSERT INTO ROL (nombre_rol, descripcion)
 VALUES
 ('Administrador', 'Control total del sistema'),
@@ -7,7 +7,6 @@ VALUES
 ('Invitado', 'Acceso limitado al sistema'),
 ('Tester', 'Prueba funcionalidades del sistema');
 
---TABLA 2: USUARIO--
 INSERT INTO USUARIO (nombre, correo, telefono, fecha_registro, id_rol)
 VALUES
 ('Juan Perez', 'juan@gmail.com', '999111222', '2025-01-10', 2),
@@ -16,7 +15,6 @@ VALUES
 ('Lucia Torres', 'lucia@gmail.com', '966444333', '2025-03-20', 2),
 ('Pedro Gomez', 'pedro@gmail.com', '955222111', '2025-04-01', 5);
 
---TABLA 3: GENERO--
 INSERT INTO GENERO (nombre_genero)
 VALUES
 ('Accion'),
@@ -25,7 +23,6 @@ VALUES
 ('Aventura'),
 ('Deportes');
 
---TABLA 4: PLATAFORMA --
 INSERT INTO PLATAFORMA (nombre_plataforma)
 VALUES
 ('PC'),
@@ -34,7 +31,6 @@ VALUES
 ('Nintendo Switch'),
 ('Mobile');
 
---TABLA 5: DESARROLLADOR --
 INSERT INTO DESARROLLADOR (nombre_desarrollador)
 VALUES
 ('FromSoftware'),
@@ -43,7 +39,6 @@ VALUES
 ('Valve'),
 ('Capcom');
 
--- TABAL 6: ESTADO --
 INSERT INTO ESTADO (tipo_estado)
 VALUES
 ('Disponible'),
@@ -52,7 +47,6 @@ VALUES
 ('Reservado'),
 ('Fuera de stock');
 
--- TABLA 7: VIDEOJUEGO --
 INSERT INTO VIDEOJUEGO 
 (titulo, anio_lanzamiento, stock, genero_id, plataforma_id, desarrollador_id, estado_id)
 VALUES
@@ -62,7 +56,6 @@ VALUES
 ('Zelda Tears of the Kingdom', 2023, 6, 4, 4, 2, 1),
 ('Half Life 2', 2004, 3, 1, 1, 4, 2);
 
---TABLA 8: LOGRO--
 INSERT INTO LOGRO (nombre, descripcion, videojuego_id)
 VALUES
 ('Juego Completado', 'Se obtiene al completar el juego', 1),
@@ -71,7 +64,6 @@ VALUES
 ('Modo Facil', 'Se obtiene al completar el modo facil', 3),
 ('Modo Intermedio', 'Se obtiene al completar el modo intermedio', 4);
 
---TABLA 9: PRESTAMO --
 INSERT INTO PRESTAMO (fecha_prestamo, fecha_limite, estado_prestamo, usuario_id)
 VALUES
 ('2026-05-01', '2026-05-10', 'Devuelto', 1),

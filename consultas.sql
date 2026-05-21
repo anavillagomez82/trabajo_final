@@ -100,9 +100,6 @@ SELECT genero_id, COUNT(*) AS cantidad_juegos
 FROM VIDEOJUEGO
 GROUP BY genero_id;
 
--- =========================
--- CONSULTAS CON FUNCIONES
--- =========================
 
 SELECT MAX(stock) AS mayor_stock
 FROM VIDEOJUEGO;

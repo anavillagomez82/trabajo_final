@@ -1,3 +1,4 @@
+--TABLA 1: ROL --
 INSERT INTO ROL (nombre_rol, descripcion)
 VALUES
 ('Administrador', 'Control total del sistema'),
@@ -6,6 +7,7 @@ VALUES
 ('Invitado', 'Acceso limitado al sistema'),
 ('Tester', 'Prueba funcionalidades del sistema');
 
+--TABLA 2: USUARIO--
 INSERT INTO USUARIO (nombre, correo, telefono, fecha_registro, id_rol)
 VALUES
 ('Juan Perez', 'juan@gmail.com', '999111222', '2025-01-10', 2),

@@ -39,3 +39,12 @@ INSERT INTO logro (id_logro, nombre, descripción, videojuego_id)
 VALUES
 (100,'juego completado', 'se obtiene al completar el juego',10);
 
+INSERT INTO PRESTAMO
+(fecha_prestamo, fecha_limite, fecha_devolucion, estado_prestamo, usuario_id)
+VALUES
+('2026-05-01', '2026-05-10', '2026-05-09', 'Devuelto', 1),
+('2026-05-05', '2026-05-15', NULL, 'Activo', 2),
+('2026-05-07', '2026-05-17', '2026-05-16', 'Devuelto', 1),
+('2026-05-09', '2026-05-19', NULL, 'Activo', 2),
+('2026-05-11', '2026-05-21', '2026-05-20', 'Devuelto', 1);
+

@@ -131,6 +131,14 @@ VALUES
 ('2026-05-14', 4, 4),
 ('2026-05-15', 5, 5);
 
+INSERT INTO sesion_juego (id_sesion, fecha_inicio, fecha_fin, horas_jugadas, usuario_id, videojuego_id)
+VALUES
+(1,'2026-05-01', '2026-06-10', 25.8, 124, 10),
+(2,'2026-05-02', '2026-05-25', 12.6, 124, 10),
+(3,'2026-05-02', '2026-05-20', 30.4, 124, 10),
+(4,'2026-05-01', '2026-07-12', 8.8, 124, 10),
+(5,'2026-05-01', '2026-05-02', 9.1, 124, 10);
+
 INSERT INTO ESTADISTICA
 (total_horas_jugadas, juegos_completados, fecha_actualizacion, usuario_id)
 VALUES

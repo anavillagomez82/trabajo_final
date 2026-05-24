@@ -154,3 +154,7 @@ UPDATE logro
 SET nombre = 'Juego completado al 100%',
 descripcion = 'Se obtiene al completar todas las misiones del juego'
 WHERE id_logro = 100;
+
+UPDATE sesion_juego
+SET horas_jugadas = 35.2
+WHERE id_sesion = 3;

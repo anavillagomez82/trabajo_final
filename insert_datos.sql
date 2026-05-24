@@ -162,3 +162,7 @@ WHERE id_sesion = 3;
 UPDATE sesion_juego
 SET fecha_fin = '2026-07-20'
 WHERE id_sesion = 4;
+
+UPDATE logro
+SET videojuego_id = 15
+WHERE id_logro = 10;

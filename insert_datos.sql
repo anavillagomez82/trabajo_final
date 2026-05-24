@@ -148,3 +148,9 @@ VALUES
 (50.7, 3, '2026-05-16', 3),
 (75.3, 4, '2026-05-16', 4),
 (100.0, 5, '2026-05-16', 5);
+
+
+UPDATE logro
+SET nombre = 'Juego completado al 100%',
+descripcion = 'Se obtiene al completar todas las misiones del juego'
+WHERE id_logro = 100;

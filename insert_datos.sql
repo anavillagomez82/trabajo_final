@@ -158,3 +158,7 @@ WHERE id_logro = 100;
 UPDATE sesion_juego
 SET horas_jugadas = 35.2
 WHERE id_sesion = 3;
+
+UPDATE sesion_juego
+SET fecha_fin = '2026-07-20'
+WHERE id_sesion = 4;

@@ -166,3 +166,8 @@ WHERE id_sesion = 4;
 UPDATE logro
 SET videojuego_id = 15
 WHERE id_logro = 10;
+
+UPDATE logro
+SET nombre = 'Modo difícil desbloqueado',
+descripcion = 'Se obtiene al terminar el modo intermedio'
+WHERE id_logro = 25;

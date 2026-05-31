@@ -42,8 +42,8 @@ CREATE TABLE USUARIO (
 CREATE TABLE VIDEOJUEGO (
     id_videojuego INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(100) NOT NULL,
-    anio_lanzamiento INT NOT NULL,
-    stock INT NOT NULL,
+    anio_lanzamiento INT NOT NULL CHECK (anio_lanzamiento >= 1950),
+    stock INT NOT NULL CHECK (stock >= 0),
 
     genero_id INT NOT NULL,
     plataforma_id INT NOT NULL,

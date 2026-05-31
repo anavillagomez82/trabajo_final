@@ -106,13 +106,13 @@ VALUES
 (100.00, '2026-05-14', 5, 5);
 
 INSERT INTO SESION_JUEGO
-(fecha_inicio, fecha_fin, horas_jugadas, usuario_id, videojuego_id)
+(id_sesion, fecha_inicio, fecha_fin, horas_jugadas, usuario_id, videojuego_id)
 VALUES
-('2026-05-01', '2026-05-01', 2.5, 1, 1),
-('2026-05-02', '2026-05-02', 4.0, 2, 2),
-('2026-05-03', '2026-05-03', 3.2, 3, 3),
-('2026-05-04', '2026-05-04', 5.7, 4, 4),
-('2026-05-05', '2026-05-05', 6.1, 5, 5);
+(1,'2026-05-01', '2026-05-01', 2.5, 1, 1),
+(2,'2026-05-02', '2026-05-02', 4.0, 2, 2),
+(3,'2026-05-03', '2026-05-03', 3.2, 3, 3),
+(4,'2026-05-04', '2026-05-04', 5.7, 4, 4),
+(5,'2026-05-05', '2026-05-05', 6.1, 5, 5);
 
 INSERT INTO COMENTARIO
 (texto, calificacion, fecha_comentario, usuario_id, videojuego_id)

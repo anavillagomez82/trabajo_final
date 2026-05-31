@@ -1,4 +1,3 @@
-
 INSERT INTO ROL (nombre_rol, descripcion)
 VALUES
 ('Administrador', 'Control total del sistema'),
@@ -47,12 +46,12 @@ VALUES
 ('Reservado'),
 ('Fuera de stock');
 
-INSERT INTO VIDEOJUEGO 
+INSERT INTO VIDEOJUEGO
 (titulo, anio_lanzamiento, stock, genero_id, plataforma_id, desarrollador_id, estado_id)
 VALUES
 ('Elden Ring', 2022, 5, 2, 2, 1, 1),
 ('GTA V', 2013, 8, 1, 1, 3, 1),
-('Resident Evil 4', 2023, 4, 3, 2, 5, 1),
+('Resident Evil 4', 2023, 4, 3, 3, 5, 1),
 ('Zelda Tears of the Kingdom', 2023, 6, 4, 4, 2, 1),
 ('Half Life 2', 2004, 3, 1, 1, 4, 2);
 
@@ -64,7 +63,8 @@ VALUES
 ('Modo Facil', 'Se obtiene al completar el modo facil', 3),
 ('Modo Intermedio', 'Se obtiene al completar el modo intermedio', 4);
 
-INSERT INTO PRESTAMO (fecha_prestamo, fecha_limite, estado_prestamo, usuario_id)
+INSERT INTO PRESTAMO
+(fecha_prestamo, fecha_limite, estado_prestamo, usuario_id)
 VALUES
 ('2026-05-01', '2026-05-10', 'Devuelto', 1),
 ('2026-05-05', '2026-05-15', 'Activo', 2),
@@ -72,7 +72,8 @@ VALUES
 ('2026-05-09', '2026-05-19', 'Activo', 4),
 ('2026-05-11', '2026-05-21', 'Devuelto', 5);
 
-INSERT INTO DEVOLUCION (fecha_devolucion, prestamo_id)
+INSERT INTO DEVOLUCION
+(fecha_devolucion, prestamo_id)
 VALUES
 ('2026-05-09', 1),
 ('2026-05-16', 3),
@@ -80,7 +81,8 @@ VALUES
 ('2026-05-25', 2),
 ('2026-05-28', 4);
 
-INSERT INTO DETALLE_PRESTAMO (prestamo_id, videojuego_id)
+INSERT INTO DETALLE_PRESTAMO
+(prestamo_id, videojuego_id)
 VALUES
 (1, 1),
 (2, 2),
@@ -88,7 +90,8 @@ VALUES
 (4, 4),
 (5, 5);
 
-INSERT INTO MULTA (monto, estado_pago, prestamo_id)
+INSERT INTO MULTA
+(monto, estado_pago, prestamo_id)
 VALUES
 (15.50, 'Pagado', 1),
 (20.00, 'Pendiente', 2),
@@ -96,7 +99,7 @@ VALUES
 (25.75, 'Pendiente', 4),
 (5.00, 'Pagado', 5);
 
-INSERT INTO PROGRESO_USUARIO 
+INSERT INTO PROGRESO_USUARIO
 (porcentaje, fecha_actualizacion, usuario_id, videojuego_id)
 VALUES
 (25.50, '2026-05-10', 1, 1),
@@ -106,13 +109,13 @@ VALUES
 (100.00, '2026-05-14', 5, 5);
 
 INSERT INTO SESION_JUEGO
-(id_sesion, fecha_inicio, fecha_fin, horas_jugadas, usuario_id, videojuego_id)
+(fecha_inicio, fecha_fin, horas_jugadas, usuario_id, videojuego_id)
 VALUES
-(1,'2026-05-01', '2026-05-01', 2.5, 1, 1),
-(2,'2026-05-02', '2026-05-02', 4.0, 2, 2),
-(3,'2026-05-03', '2026-05-03', 3.2, 3, 3),
-(4,'2026-05-04', '2026-05-04', 5.7, 4, 4),
-(5,'2026-05-05', '2026-05-05', 6.1, 5, 5);
+('2026-05-01', '2026-05-01', 2.5, 1, 1),
+('2026-05-02', '2026-05-02', 4.0, 2, 2),
+('2026-05-03', '2026-05-03', 3.2, 3, 3),
+('2026-05-04', '2026-05-04', 5.7, 4, 4),
+('2026-05-05', '2026-05-05', 6.1, 5, 5);
 
 INSERT INTO COMENTARIO
 (texto, calificacion, fecha_comentario, usuario_id, videojuego_id)
@@ -121,7 +124,10 @@ VALUES
 ('La historia es increible', 4, '2026-05-07', 2, 2),
 ('Muy buenos graficos', 5, '2026-05-08', 3, 3),
 ('Gameplay bastante divertido', 4, '2026-05-09', 4, 4),
-('Un clasico que nunca envejece', 5, '2026-05-10', 5, 5);
+('Un clasico que nunca envejece', 5, '2026-05-10', 5, 5),
+('Obra maestra absoluta', 5, '2026-05-20', 2, 1),
+('Muy dificil pero excelente', 4, '2026-05-21', 3, 1),
+('Gran historia', 5, '2026-05-22', 4, 2);
 
 INSERT INTO LOGRO_USUARIO
 (fecha_desbloqueo, usuario_id, logro_id)
@@ -132,14 +138,6 @@ VALUES
 ('2026-05-14', 4, 4),
 ('2026-05-15', 5, 5);
 
-INSERT INTO sesion_juego (id_sesion, fecha_inicio, fecha_fin, horas_jugadas, usuario_id, videojuego_id)
-VALUES
-(1,'2026-05-01', '2026-06-10', 25.8, 124, 10),
-(2,'2026-05-02', '2026-05-25', 12.6, 124, 10),
-(3,'2026-05-02', '2026-05-20', 30.4, 124, 10),
-(4,'2026-05-01', '2026-07-12', 8.8, 124, 10),
-(5,'2026-05-01', '2026-05-02', 9.1, 124, 10);
-
 INSERT INTO ESTADISTICA
 (total_horas_jugadas, juegos_completados, fecha_actualizacion, usuario_id)
 VALUES
@@ -149,25 +147,24 @@ VALUES
 (75.3, 4, '2026-05-16', 4),
 (100.0, 5, '2026-05-16', 5);
 
-
-UPDATE logro
+UPDATE LOGRO
 SET nombre = 'Juego completado al 100%',
-descripcion = 'Se obtiene al completar todas las misiones del juego'
-WHERE id_logro = 100;
+    descripcion = 'Se obtiene al completar todas las misiones del juego'
+WHERE id_logro = 1;
 
-UPDATE sesion_juego
+UPDATE SESION_JUEGO
 SET horas_jugadas = 35.2
 WHERE id_sesion = 3;
 
-UPDATE sesion_juego
+UPDATE SESION_JUEGO
 SET fecha_fin = '2026-07-20'
 WHERE id_sesion = 4;
 
-UPDATE logro
-SET videojuego_id = 15
-WHERE id_logro = 10;
+UPDATE LOGRO
+SET videojuego_id = 2
+WHERE id_logro = 2;
 
-UPDATE logro
-SET nombre = 'Modo difícil desbloqueado',
-descripcion = 'Se obtiene al terminar el modo intermedio'
-WHERE id_logro = 25;
+UPDATE LOGRO
+SET nombre = 'Modo dificil desbloqueado',
+    descripcion = 'Se obtiene al terminar el modo intermedio'
+WHERE id_logro = 5;

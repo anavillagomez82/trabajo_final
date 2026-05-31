@@ -71,7 +71,8 @@ CREATE TABLE PRESTAMO (
     usuario_id INT NOT NULL,
 
     FOREIGN KEY (usuario_id)
-        REFERENCES USUARIO(id_usuario)
+    REFERENCES USUARIO(id_usuario)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE DEVOLUCION (

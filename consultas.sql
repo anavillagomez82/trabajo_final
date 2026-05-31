@@ -1,4 +1,3 @@
-
 SELECT * FROM USUARIO;
 
 SELECT * FROM VIDEOJUEGO;
@@ -8,6 +7,8 @@ SELECT * FROM PRESTAMO;
 SELECT * FROM COMENTARIO;
 
 SELECT * FROM LOGRO;
+
+
 
 SELECT *
 FROM VIDEOJUEGO
@@ -29,6 +30,8 @@ SELECT *
 FROM COMENTARIO
 WHERE calificacion = 5;
 
+
+
 SELECT *
 FROM VIDEOJUEGO
 ORDER BY anio_lanzamiento DESC;
@@ -40,6 +43,8 @@ ORDER BY nombre ASC;
 SELECT *
 FROM ESTADISTICA
 ORDER BY total_horas_jugadas DESC;
+
+
 
 SELECT U.nombre, R.nombre_rol
 FROM USUARIO U
@@ -84,6 +89,8 @@ ON LU.usuario_id = U.id_usuario
 JOIN LOGRO L
 ON LU.logro_id = L.id_logro;
 
+
+
 SELECT estado_prestamo, COUNT(*) AS cantidad
 FROM PRESTAMO
 GROUP BY estado_prestamo;
@@ -101,6 +108,7 @@ FROM VIDEOJUEGO
 GROUP BY genero_id;
 
 
+
 SELECT MAX(stock) AS mayor_stock
 FROM VIDEOJUEGO;
 
@@ -115,6 +123,8 @@ FROM MULTA;
 
 SELECT COUNT(*) AS total_usuarios
 FROM USUARIO;
+
+
 
 SELECT titulo
 FROM VIDEOJUEGO
@@ -138,7 +148,9 @@ WHERE id_videojuego IN (
     WHERE calificacion = 5
 );
 
-SELECT 
+
+
+SELECT
 U.nombre,
 V.titulo,
 PU.porcentaje
@@ -207,3 +219,76 @@ JOIN PRESTAMO P
 ON M.prestamo_id = P.id_prestamo
 JOIN USUARIO U
 ON P.usuario_id = U.id_usuario;
+
+
+
+SELECT
+V.titulo,
+SUM(SJ.horas_jugadas) AS horas_totales
+FROM SESION_JUEGO SJ
+JOIN VIDEOJUEGO V
+ON SJ.videojuego_id = V.id_videojuego
+GROUP BY V.titulo
+ORDER BY horas_totales DESC
+LIMIT 1;
+
+SELECT
+U.nombre,
+SUM(SJ.horas_jugadas) AS horas_totales
+FROM SESION_JUEGO SJ
+JOIN USUARIO U
+ON SJ.usuario_id = U.id_usuario
+GROUP BY U.nombre
+ORDER BY horas_totales DESC
+LIMIT 1;
+
+SELECT titulo
+FROM VIDEOJUEGO
+WHERE id_videojuego NOT IN (
+    SELECT videojuego_id
+    FROM COMENTARIO
+);
+
+SELECT
+U.nombre,
+M.monto
+FROM MULTA M
+JOIN PRESTAMO P
+ON M.prestamo_id = P.id_prestamo
+JOIN USUARIO U
+ON P.usuario_id = U.id_usuario
+WHERE M.estado_pago = 'Pendiente';
+
+SELECT
+AVG(horas_jugadas) AS promedio_horas
+FROM SESION_JUEGO;
+
+SELECT
+U.nombre,
+V.titulo,
+PU.porcentaje,
+E.total_horas_jugadas
+FROM USUARIO U
+JOIN PROGRESO_USUARIO PU
+ON U.id_usuario = PU.usuario_id
+JOIN VIDEOJUEGO V
+ON PU.videojuego_id = V.id_videojuego
+JOIN ESTADISTICA E
+ON U.id_usuario = E.usuario_id
+WHERE PU.porcentaje >= 50
+ORDER BY E.total_horas_jugadas DESC;
+
+
+
+UPDATE USUARIO
+SET telefono = '999888777'
+WHERE id_usuario = 1;
+
+UPDATE VIDEOJUEGO
+SET stock = stock + 2
+WHERE id_videojuego = 1;
+
+
+
+DELETE FROM COMENTARIO
+WHERE id_comentario = 8;

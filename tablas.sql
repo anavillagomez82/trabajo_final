@@ -93,7 +93,8 @@ CREATE TABLE DETALLE_PRESTAMO (
     videojuego_id INT NOT NULL,
 
     FOREIGN KEY (prestamo_id)
-        REFERENCES PRESTAMO(id_prestamo),
+    REFERENCES PRESTAMO(id_prestamo)
+    ON DELETE CASCADE,
 
     FOREIGN KEY (videojuego_id)
         REFERENCES VIDEOJUEGO(id_videojuego)

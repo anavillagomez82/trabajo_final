@@ -10,9 +10,9 @@ La base de datos fue desarrollada utilizando SQL puro, aplicando principios de i
 
 ## Integrantes
 
-* Purguaya Dennis
-* Cateriano Juan Pablo
-* Villagomez Ana
+* Purguaya Dennis (DennisPurguaya)
+* Cateriano Juan Pablo (Juan-Pablo-Cateriano)
+* Villagomez Ana (anavillagomez)
 
 ## Tecnologías Utilizadas
 

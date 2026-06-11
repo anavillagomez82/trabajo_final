@@ -22,9 +22,8 @@ db.connect((err) => {
     console.log('¡Conectado exitosamente a la base de datos biblioteca_videojuegos!');
 });
 
-// =============================================================================
-// RÚBRICA: CRUD COMPLEJO (Maneja lógica de 3 a más tablas conectadas)
-// =============================================================================
+// CRUD COMPLEJO (3 a más tablas conectadas)
+
 app.get('/api/prestamos-detallados', (req, res) => {
     const query = `
         SELECT 
@@ -47,9 +46,8 @@ app.get('/api/prestamos-detallados', (req, res) => {
     });
 });
 
-// =============================================================================
-// RÚBRICA: REPORTE AVANZADO CON GROUP BY / HAVING Y EXPORTACIÓN A CSV (EXCEL)
-// =============================================================================
+// REPORTE AVANZADO CON GROUP BY / HAVING Y EXPORTACIÓN A CSV (EXCEL)
+
 app.get('/api/reporte-videojuegos/csv', (req, res) => {
     const query = `
         SELECT 

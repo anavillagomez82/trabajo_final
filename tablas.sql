@@ -225,7 +225,7 @@ CREATE TABLE LOGRO_USUARIO (
     usuario_id INT NOT NULL,
     logro_id INT NOT NULL,
 
-    UNIQUE(usuario_id, logro_id)
+    UNIQUE(usuario_id, logro_id),
 
     FOREIGN KEY (usuario_id)
         REFERENCES USUARIO(id_usuario)

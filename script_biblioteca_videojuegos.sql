@@ -306,9 +306,7 @@ SET nombre = 'Modo dificil desbloqueado', descripcion = 'Se obtiene al terminar 
 CREATE INDEX idx_videojuego_anio 
 ON VIDEOJUEGO(anio_lanzamiento);
 
---  GESTIÓN DE TRANSACCIONES (ACID)
-
--- Simulación de proceso crítico coordinado: Registrar préstamo y actualizar stock
+-- (GESTIÓN DE TRANSACCIONES (ACID))Simulación de proceso crítico coordinado: Registrar préstamo y actualizar stock
 BEGIN;
 
 INSERT INTO PRESTAMO (fecha_prestamo, fecha_limite, estado_prestamo, usuario_id) 
@@ -320,5 +318,21 @@ VALUES (LAST_INSERT_ID(), 2);
 UPDATE VIDEOJUEGO 
 SET stock = stock - 1 
 WHERE id_videojuego = 2;
+
+--Índices para la consulta de Historial de Préstamos)
+CREATE INDEX idx_prestamo_usuario 
+ON PRESTAMO(usuario_id);
+
+CREATE INDEX idx_detalle_prestamo 
+ON DETALLE_PRESTAMO(prestamo_id);
+
+CREATE INDEX idx_detalle_videojuego 
+ON DETALLE_PRESTAMO(videojuego_id);
+
+-- Índices para el Reporte Avanzado de 3 tablas (Group By / Having)
+CREATE INDEX idx_videojuego_categoria 
+ON VIDEOJUEGO(categoria_id);
+CREATE INDEX idx_comentario_videojuego 
+ON COMENTARIO(videojuego_id);
 
 COMMIT;

@@ -291,7 +291,7 @@ INSERT INTO ESTADISTICA (total_horas_jugadas, juegos_completados, fecha_actualiz
 (75.3, 4, '2026-05-16', 4),
 (100.0, 5, '2026-05-16', 5);
 
--- ACTUALIZACIONES DE NEGOCIO (UPDATES)
+-- ACTUALIZACIONES(UPDATES)
 
 UPDATE LOGRO SET nombre = 'Juego completado al 100%', descripcion = 'Se obtiene al completar todas las misiones del juego' WHERE id_logro = 1;
 UPDATE SESION_JUEGO SET horas_jugadas = 35.2 WHERE id_sesion = 3;
@@ -300,39 +300,36 @@ UPDATE LOGRO SET videojuego_id = 2 WHERE id_logro = 2;
 UPDATE LOGRO 
 SET nombre = 'Modo dificil desbloqueado', descripcion = 'Se obtiene al terminar el modo intermedio' WHERE id_logro = 5;
 
--- OPTIMIZACIÓN (ÍNDICES)
--- Plan de ejecución ANTES de la optimización (Muestra 'ALL' escaneando todas las filas)
+-- ÍNDICES: ENTREGABLE 2
 
-CREATE INDEX idx_videojuego_anio 
-ON VIDEOJUEGO(anio_lanzamiento);
+CREATE INDEX idx_prestamo_usuario ON PRESTAMO(usuario_id);
+CREATE INDEX idx_detalle_prestamo ON DETALLE_PRESTAMO(prestamo_id);
+CREATE INDEX idx_detalle_videojuego ON DETALLE_PRESTAMO(videojuego_id);
 
--- (GESTIÓN DE TRANSACCIONES (ACID))Simulación de proceso crítico coordinado: Registrar préstamo y actualizar stock
-BEGIN;
+CREATE INDEX idx_comentario_videojuego ON COMENTARIO(videojuego_id);
+
+-- GESTIÓN DE TRANSACCIONES (ACID):ENTREGABLE 2 --> Proceso elegido: Registro de un Préstamo y Actualización de Inventario
+
+START TRANSACTION;
+SET @error_proceso = 0;
 
 INSERT INTO PRESTAMO (fecha_prestamo, fecha_limite, estado_prestamo, usuario_id) 
 VALUES (CURDATE(), DATE_ADD(CURDATE(), INTERVAL 7 DAY), 'Activo', 1);
 
+SET @nuevo_prestamo_id = LAST_INSERT_ID();
+
 INSERT INTO DETALLE_PRESTAMO (prestamo_id, videojuego_id) 
-VALUES (LAST_INSERT_ID(), 2);
+VALUES (@nuevo_prestamo_id, 2);
 
 UPDATE VIDEOJUEGO 
 SET stock = stock - 1 
 WHERE id_videojuego = 2;
 
---Índices para la consulta de Historial de Préstamos)
-CREATE INDEX idx_prestamo_usuario 
-ON PRESTAMO(usuario_id);
-
-CREATE INDEX idx_detalle_prestamo 
-ON DETALLE_PRESTAMO(prestamo_id);
-
-CREATE INDEX idx_detalle_videojuego 
-ON DETALLE_PRESTAMO(videojuego_id);
-
--- Índices para el Reporte Avanzado de 3 tablas (Group By / Having)
-CREATE INDEX idx_videojuego_categoria 
-ON VIDEOJUEGO(categoria_id);
-CREATE INDEX idx_comentario_videojuego 
-ON COMENTARIO(videojuego_id);
-
-COMMIT;
+-- EVALUACIÓN DE CONTROL (COMMIT / ROLLBACK)
+IF @error_proceso = 0 THEN
+    COMMIT;
+    SELECT '¡Transacción completada con éxito! Propiedades ACID garantizadas. Datos guardados de forma permanente.' AS Estado_Transaccion;
+ELSE
+    ROLLBACK;
+    SELECT 'Error crítico detectado en el flujo. Transacción abortada mediante ROLLBACK. Base de datos revertida.' AS Estado_Transaccion;
+END IF;

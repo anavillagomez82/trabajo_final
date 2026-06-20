@@ -308,10 +308,9 @@ CREATE INDEX idx_detalle_videojuego ON DETALLE_PRESTAMO(videojuego_id);
 
 CREATE INDEX idx_comentario_videojuego ON COMENTARIO(videojuego_id);
 
--- GESTIÓN DE TRANSACCIONES (ACID):ENTREGABLE 2 --> Proceso elegido: Registro de un Préstamo y Actualización de Inventario
+-- GESTIÓN DE TRANSACCIONES (ACID) - ENTREGABLE 2
 
 START TRANSACTION;
-SET @error_proceso = 0;
 
 INSERT INTO PRESTAMO (fecha_prestamo, fecha_limite, estado_prestamo, usuario_id) 
 VALUES (CURDATE(), DATE_ADD(CURDATE(), INTERVAL 7 DAY), 'Activo', 1);
@@ -325,11 +324,6 @@ UPDATE VIDEOJUEGO
 SET stock = stock - 1 
 WHERE id_videojuego = 2;
 
--- EVALUACIÓN DE CONTROL (COMMIT / ROLLBACK)
-IF @error_proceso = 0 THEN
-    COMMIT;
-    SELECT '¡Transacción completada con éxito! Propiedades ACID garantizadas. Datos guardados de forma permanente.' AS Estado_Transaccion;
-ELSE
-    ROLLBACK;
-    SELECT 'Error crítico detectado en el flujo. Transacción abortada mediante ROLLBACK. Base de datos revertida.' AS Estado_Transaccion;
-END IF;
+COMMIT;
+
+SELECT '¡Transacción ejecutada con éxito! Datos validados con COMMIT.' AS Estado_Transaccion;

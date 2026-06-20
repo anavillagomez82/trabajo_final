@@ -308,7 +308,8 @@ CREATE INDEX idx_detalle_videojuego ON DETALLE_PRESTAMO(videojuego_id);
 
 CREATE INDEX idx_comentario_videojuego ON COMENTARIO(videojuego_id);
 
--- GESTIÓN DE TRANSACCIONES (ACID) - ENTREGABLE 2
+-- GESTIÓN DE TRANSACCIONES (ACID)
+-- Proceso: Registrar un préstamo y descontar stock en una sola transacción unificada.
 
 START TRANSACTION;
 
@@ -325,5 +326,3 @@ SET stock = stock - 1
 WHERE id_videojuego = 2;
 
 COMMIT;
-
-SELECT '¡Transacción ejecutada con éxito! Datos validados con COMMIT.' AS Estado_Transaccion;

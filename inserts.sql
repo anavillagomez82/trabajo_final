@@ -46,14 +46,13 @@ VALUES
 ('Reservado'),
 ('Fuera de stock');
 
-INSERT INTO VIDEOJUEGO
-(titulo, anio_lanzamiento, stock, genero_id, plataforma_id, desarrollador_id, estado_id)
-VALUES
-('Elden Ring', 2022, 5, 2, 2, 1, 1),
-('GTA V', 2013, 8, 1, 1, 3, 1),
-('Resident Evil 4', 2023, 4, 3, 3, 5, 1),
-('Zelda Tears of the Kingdom', 2023, 6, 4, 4, 2, 1),
-('Half Life 2', 2004, 3, 1, 1, 4, 2);
+INSERT INTO VIDEOJUEGO (titulo, anio_lanzamiento, stock, genero_id, plataforma_id, desarrollador_id, estado_id, caracteristicas_extra)
+VALUES 
+('Grand Theft Auto V', 2013, 5, 1, 2, 1, 1, '{"idiomas": ["Español", "Inglés"], "espacio_gb": 100, "multijugador": true}'),
+('The Legend of Zelda: Breath of the Wild', 2017, 3, 4, 4, 2, 1, '{"idiomas": ["Español", "Inglés", "Japonés"], "espacio_gb": 16, "multijugador": false}'),
+('Elden Ring', 2022, 7, 2, 1, 3, 1, '{"idiomas": ["Español", "Inglés"], "espacio_gb": 60, "multijugador": true, "coop_online": true}'),
+('Resident Evil 4 Remake', 2023, 4, 3, 2, 4, 1, '{"idiomas": ["Español", "Inglés", "Francés"], "espacio_gb": 45, "multijugador": false}'),
+('EA Sports FC 24', 2023, 10, 5, 3, 5, 1, '{"idiomas": ["Español", "Inglés"], "espacio_gb": 50, "multijugador": true, "modos": ["FUT", "Carrera"]}');
 
 INSERT INTO LOGRO (nombre, descripcion, videojuego_id)
 VALUES

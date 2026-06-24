@@ -55,6 +55,8 @@ CREATE TABLE VIDEOJUEGO (
     desarrollador_id INT,
     estado_id INT NOT NULL,
 
+    caracteristicas_extra JSON NULL,
+
     FOREIGN KEY (genero_id)
         REFERENCES GENERO(id_genero)
         ON UPDATE CASCADE,

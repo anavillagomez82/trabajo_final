@@ -44,7 +44,7 @@ Se incorporó el soporte para datos semiestructurados usando el tipo de dato **J
 * **Justificación:** Las especificaciones técnicas de hardware (idiomas, almacenamiento base en GB, modos cooperativos o soporte VR) cambian drásticamente entre plataformas y generaciones. Almacenarlas en una columna JSON flexibiliza el esquema evitando alterar físicamente el DDL o crear tablas relacionales artificiales vacías, manteniendo el rendimiento del motor.
 
 ### 3. Reportes y Exportación Compleja
-El endpoint `/api/reportes/juegos-populares?format=csv` realiza consultas de agregación complejas (`GROUP BY`, `HAVING promedio >= 4`) combinando múltiples tablas, permitiendo la generación dinámica y descarga en formato **CSV** directo para su lectura en Excel.
+El endpoint `/api/reporte-videojuegos/csv` realiza consultas de agregación complejas (`GROUP BY`, `HAVING promedio >= 4`) combinando múltiples tablas, permitiendo la generación dinámica y descarga en formato **CSV** directo para su lectura en Excel.
 
 ### 4. Optimización mediante Índices (EXPLAIN)
 La base de datos cuenta con índices secundarios estratégicos (como `idx_prestamo_usuario` y `idx_detalle_prestamo`) diseñados tras analizar cuellos de botella. 

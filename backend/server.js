@@ -1,80 +1,107 @@
 const express = require('express');
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 const cors = require('cors');
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-const dbConfig = {
+// 1. Conexión a la Base de Datos
+const db = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password: '', 
-    database: 'biblioteca_videojuegos',
-    port: 3306
-};
-
-app.post('/api/prestamos', async (req, res) => {
-    const { usuario_id, videojuego_id, fecha_prestamo, fecha_limite, estado_prestamo } = req.body;
-    const connection = await mysql.createConnection(dbConfig);
-    
-    try {
-        await connection.beginTransaction(); 
-        
-        // 1. Validar stock
-        const [juegos] = await connection.execute('SELECT stock FROM VIDEOJUEGO WHERE id_videojuego = ?', [videojuego_id]);
-        if (juegos[0].stock <= 0) throw new Error('Sin stock');
-
-        // 2. Insertar Préstamo
-        const [prestamo] = await connection.execute(
-            'INSERT INTO PRESTAMO (fecha_prestamo, fecha_limite, estado_prestamo, usuario_id) VALUES (?, ?, ?, ?)',
-            [fecha_prestamo, fecha_limite, estado_prestamo, usuario_id]
-        );
-
-        // 3. Insertar Detalle 
-        await connection.execute(
-            'INSERT INTO DETALLE_PRESTAMO (prestamo_id, videojuego_id) VALUES (?, ?)',
-            [prestamo.insertId, videojuego_id]
-        );
-
-        // 4. Actualizar Stock
-        await connection.execute('UPDATE VIDEOJUEGO SET stock = stock - 1 WHERE id_videojuego = ?', [videojuego_id]);
-
-        await connection.commit(); 
-        res.status(201).json({ success: true, message: 'Préstamo registrado y stock actualizado.' });
-    } catch (error) {
-        await connection.rollback(); 
-        res.status(500).json({ error: error.message });
-    } finally {
-        await connection.end();
-    }
+    user: 'root',      
+    password: '',      
+    database: 'biblioteca_videojuegos'
 });
 
-//Reportes y Exportación CSV
-app.get('/api/reportes/juegos-populares', async (req, res) => {
-    const { format } = req.query;
-    const connection = await mysql.createConnection(dbConfig);
-    
-    try {
-        // (GROUP BY, HAVING)
-        const query = `
-            SELECT V.titulo, AVG(C.calificacion) AS promedio 
-            FROM COMENTARIO C JOIN VIDEOJUEGO V ON C.videojuego_id = V.id_videojuego 
-            GROUP BY V.titulo HAVING promedio >= 4
-        `;
-        const [rows] = await connection.execute(query);
+db.connect((err) => {
+    if (err) {
+        console.error('Error al conectar a MySQL:', err);
+        return;
+    }
+    console.log('¡Conectado exitosamente a la base de datos biblioteca_videojuegos!');
+});
 
-        if (format === 'csv') {
-            res.setHeader('Content-Type', 'text/csv');
-            res.setHeader('Content-Disposition', 'attachment; filename=reporte.csv');
-            let csv = 'Titulo,Promedio\n';
-            rows.forEach(r => csv += `"${r.titulo}",${r.promedio}\n`);
-            return res.send(csv);
+// CRUD COMPLEJO (lógica de 3 a más tablas conectadas)
+app.get('/api/prestamos-detallados', (req, res) => {
+    const query = `
+        SELECT 
+            p.id_prestamo, 
+            u.nombre AS nombre_usuario, 
+            v.titulo AS titulo_videojuego, 
+            p.fecha_prestamo, 
+            p.estado_prestamo
+        FROM PRESTAMO p
+        INNER JOIN USUARIO u ON p.usuario_id = u.id_usuario
+        INNER JOIN DETALLE_PRESTAMO dp ON p.id_prestamo = dp.prestamo_id
+        INNER JOIN VIDEOJUEGO v ON dp.videojuego_id = v.id_videojuego
+    `;
+
+    db.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error en la consulta compleja', detalles: err });
         }
-        res.json({ data: rows });
-    } finally {
-        await connection.end();
-    }
+        res.json(results);
+    });
 });
 
-app.listen(3000, () => console.log('Servidor listo en http://localhost:3000'));
+// REPORTE AVANZADO CON GROUP BY / HAVING Y EXPORTACIÓN A CSV (EXCEL)
+app.get('/api/reporte-videojuegos/csv', (req, res) => {
+    const query = `
+    SELECT 
+        v.titulo AS Videojuego,
+        d.nombre_desarrollador AS Desarrollador,
+        COUNT(c.id_comentario) AS Total_Comentarios, 
+        AVG(c.calificacion) AS Promedio_Calificacion
+    FROM VIDEOJUEGO v
+    INNER JOIN DESARROLLADOR d ON v.desarrollador_id = d.id_desarrollador
+    LEFT JOIN COMENTARIO c ON v.id_videojuego = c.videojuego_id
+    GROUP BY v.id_videojuego, v.titulo, d.nombre_desarrollador
+    HAVING Total_Comentarios > 0
+`;
+
+    db.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Error generando el reporte');
+        }
+
+        let csvContent = "\uFEFFVideojuego;Desarrollador;Total Comentarios;Promedio Calificacion\n"; 
+
+        results.forEach(row => {
+            csvContent += `"${row.Videojuego}";"${row.Desarrollador}";${row.Total_Comentarios};${row.Promedio_Calificacion}\n`;
+        });
+
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+        res.setHeader('Content-Disposition', 'attachment; filename=reporte_videojuegos.csv');
+        
+        res.status(200).send(csvContent);
+    });
+});
+
+// MÓDULO HÍBRIDO NOSQL (MANEJO DE DATOS JSON)
+
+app.get('/api/videojuegos-nosql', (req, res) => {
+    // Usamos JSON_EXTRACT para sacar los atributos dinámicos directamente en SQL
+    const query = `
+        SELECT 
+            id_videojuego, 
+            titulo, 
+            caracteristicas_extra,
+            JSON_EXTRACT(caracteristicas_extra, '$.espacio_gb') AS espacio_almacenamiento,
+            JSON_EXTRACT(caracteristicas_extra, '$.idioma') AS idioma_disponible
+        FROM VIDEOJUEGO
+    `;
+
+    db.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al consultar el módulo híbrido NoSQL', detalles: err });
+        }
+        res.json(results);
+    });
+});
+
+// 2. Encender Servidor
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
